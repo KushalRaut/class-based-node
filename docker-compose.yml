@@ -1,0 +1,21 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodejs-classes
+    restart: on-failure
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "3000:8000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo-nodejs
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
