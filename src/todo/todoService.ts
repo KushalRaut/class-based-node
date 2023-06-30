@@ -16,12 +16,14 @@ export class TodoService implements ITodoAbstract {
   }
 
   async createTodo(todo: any): Promise<ITodo> {
-    const newTodo = new this.model(todo);
-    return await newTodo.save();
+    const reqTodo = new this.model(todo);
+    const newTodo = await reqTodo.save();
+    return newTodo;
   }
 
   async getTodos(): Promise<ITodo[]> {
-    return await this.model.find({});
+    const allTodos: ITodo[] = await this.model.find({});
+    return allTodos;
   }
 
   async getTodoById(todoId: string): Promise<ITodo> {
